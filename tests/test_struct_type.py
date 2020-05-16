@@ -12,7 +12,7 @@ test_data = [
           StructField('name42', IntegerType(), True),
           StructField('name52', DateType(), True),
           StructField('name62', TimestampType(), True),
-          StructField('name72', ShortyType(), False),
+          StructField('name72', ShortType(), False),
         ])""",
         StructType('schemaname2', [
           StructField('name12', 'LongType()', True),
@@ -21,7 +21,7 @@ test_data = [
           StructField('name42', 'IntegerType()', True),
           StructField('name52', 'DateType()', True),
           StructField('name62', 'TimestampType()', True),
-          StructField('name72', 'ShortyType()', False),
+          StructField('name72', 'ShortType()', False),
         ])
      ),
     ("""
@@ -29,7 +29,7 @@ test_data = [
           StructField('name22',StringType(), True),StructField('name32',ByteType(), False),
           StructField('name42',IntegerType(), True),         StructField('name52',DateType(), True),
           StructField("name62",TimestampType(),True),
-          StructField('name72',ShortyType(),False)
+          StructField('name72',ShortType(),False)
         ])""",
      StructType('my_cool_schema', [
          StructField('name12', 'LongType()', False),
@@ -38,7 +38,7 @@ test_data = [
          StructField('name42', 'IntegerType()', True),
          StructField('name52', 'DateType()', True),
          StructField('name62', 'TimestampType()', True),
-         StructField('name72', 'ShortyType()', False),
+         StructField('name72', 'ShortType()', False),
      ])
      ),
 ]
@@ -58,14 +58,14 @@ def test_parse_multiple():
           StructField('name42', IntegerType(), True),
           StructField('name52', DateType(), True),
           StructField('name62', TimestampType(), True),
-          StructField('name72', ShortyType(), False),
+          StructField('name72', ShortType(), False),
         ])
 
       my_cool_schema     =StructType([StructField('name12',LongType(),False),
           StructField('name22',StringType(), True),StructField('name32',ByteType(), False),
           StructField('name42',IntegerType(), True),         StructField('name52',DateType(), True),
           StructField("name62",TimestampType(),True),
-          StructField('name72',ShortyType(),False)
+          StructField('name72',ShortType(),False)
         ])
     """
 
@@ -77,7 +77,7 @@ def test_parse_multiple():
             StructField('name42', 'IntegerType()', True),
             StructField('name52', 'DateType()', True),
             StructField('name62', 'TimestampType()', True),
-            StructField('name72', 'ShortyType()', False),
+            StructField('name72', 'ShortType()', False),
         ]),
         StructType('my_cool_schema', [
             StructField('name12', 'LongType()', False),
@@ -86,7 +86,7 @@ def test_parse_multiple():
             StructField('name42', 'IntegerType()', True),
             StructField('name52', 'DateType()', True),
             StructField('name62', 'TimestampType()', True),
-            StructField('name72', 'ShortyType()', False),
+            StructField('name72', 'ShortType()', False),
         ])
     ]
 
