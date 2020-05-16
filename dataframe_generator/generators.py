@@ -9,66 +9,42 @@ class DataType:
 
     @staticmethod
     def parse(data_type, raw_string: str):
-        if re.match(data_type.type_descriptor(), raw_string):
+        if re.match(data_type.type_descriptor, raw_string):
             return data_type()
         else:
             return None
 
 
 class ByteType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'ByteType\(\)'
+    type_descriptor = r'ByteType\(\)'
 
 
 class ShortType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'ShortType\(\)'
+    type_descriptor = r'ShortType\(\)'
 
 
 class IntegerType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'IntegerType\(\)'
+    type_descriptor = r'IntegerType\(\)'
 
 
 class LongType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'LongType\(\)'
+    type_descriptor = r'LongType\(\)'
 
 
 class DecimalType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'DecimalType\(\s*\d+\s*,\s*\d+\s*\)'
+    type_descriptor = r'DecimalType\(\s*\d+\s*,\s*\d+\s*\)'
 
 
 class StringType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'StringType\(\)'
+    type_descriptor = r'StringType\(\)'
 
 
 class DateType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'DateType\(\)'
+    type_descriptor = r'DateType\(\)'
 
 
 class TimestampType(DataType):
-
-    @staticmethod
-    def type_descriptor() -> str:
-        return r'TimestampType\(\)'
+    type_descriptor = r'TimestampType\(\)'
 
 
 supported_types = [ByteType,

@@ -14,7 +14,7 @@ class StructField:
     def parse(raw_string: str):
         trimmed_raw_string = raw_string.strip()
         data_types_regexp = "|".join(
-            list(map(lambda supported_type: supported_type.type_descriptor(), supported_types))
+            list(map(lambda supported_type: supported_type.type_descriptor, supported_types))
         )
         struct_field_template = r'StructField\((.*?),\s*(' + data_types_regexp + r')\s*,(.*?)\)'
         match_result = re.match(struct_field_template, trimmed_raw_string)
