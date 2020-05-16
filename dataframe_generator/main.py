@@ -1,7 +1,7 @@
 import re
 from typing import List
 
-from dataframe_generator.generators import supported_types, LongType, DataType
+from dataframe_generator.generators import supported_types, DataType
 
 
 class StructField:
@@ -29,12 +29,14 @@ class StructField:
         return raw_name.strip()[1:-1]
 
     @staticmethod
-    def __parse_data_type(raw_data_type: str) -> DataType:
-        trimmed_raw_type = raw_data_type.strip()
-        data_type = next(
-            filter(lambda supported_type: supported_type.is_it_this_type(trimmed_raw_type), supported_types)
-        )
-        return data_type
+    def __parse_data_type(raw_string: str) -> DataType:
+        trimmed_raw_string = raw_string.strip()
+        for supported_type in supported_types:
+            potential_result = supported_type.parse(supported_type, trimmed_raw_string)
+            if potential_result is not None:
+                return potential_result
+
+        return None
 
     @staticmethod
     def __parse_nullable(raw_nullable: str) -> bool:

@@ -3,59 +3,80 @@ import re
 
 class DataType:
 
-    def type_descriptor(self) -> str:
+    @staticmethod
+    def type_descriptor() -> str:
         pass
 
-    def is_it_this_type(self, raw_string: str) -> bool:
-        return re.match(self.type_descriptor(), raw_string) is not None
+    @staticmethod
+    def parse(data_type, raw_string: str):
+        if re.match(data_type.type_descriptor(), raw_string):
+            return data_type()
+        else:
+            return None
 
 
 class ByteType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'ByteType\(\)'
 
 
 class ShortType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'ShortType\(\)'
 
 
 class IntegerType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'IntegerType\(\)'
 
 
 class LongType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'LongType\(\)'
 
 
 class DecimalType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'DecimalType\(\s*\d+\s*,\s*\d+\s*\)'
 
 
 class StringType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'StringType\(\)'
 
 
 class DateType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'DateType\(\)'
 
 
 class TimestampType(DataType):
-    def type_descriptor(self) -> str:
+
+    @staticmethod
+    def type_descriptor() -> str:
         return r'TimestampType\(\)'
 
 
-supported_types = [ByteType(),
-                   ShortType(),
-                   IntegerType(),
-                   LongType(),
-                   DecimalType(),
-                   StringType(),
-                   DateType(),
-                   TimestampType()
+supported_types = [ByteType,
+                   ShortType,
+                   IntegerType,
+                   LongType,
+                   DecimalType,
+                   StringType,
+                   DateType,
+                   TimestampType
                    ]
