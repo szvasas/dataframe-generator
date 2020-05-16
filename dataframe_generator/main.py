@@ -44,8 +44,9 @@ input = """
 # schema_name, raw_struct_fields = parse_struct_type_raw_string(result[0])
 # print("success")
 
-x = StructField('name', 'IntegerType()', True)
-print(x)
+result = StructField.parse("StructField('name12', LongType(), True),")
+print(result)
+print(result.name)
 
 # input2 = "valami(12313) valami(45412) valami(1235)"
 #
