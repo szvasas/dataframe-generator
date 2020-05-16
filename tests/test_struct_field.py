@@ -7,6 +7,8 @@ test_data = [
     ("StructField('name12', LongType(), True),", StructField('name12', 'LongType()', True)),
     ("StructField('name12', LongType(), False),", StructField('name12', 'LongType()', False)),
     ('StructField("name12", DecimalType(13, 2), False),', StructField('name12', 'DecimalType(13, 2)', False)),
+    ('StructField("abc", DecimalType(  13,   2  ), False),', StructField('abc', 'DecimalType(  13,   2  )', False)),
+    ('StructField("abc",DecimalType(13,2),False),', StructField('abc', 'DecimalType(13,2)', False)),
     ('StructField(    "name12"    ,     StringType(),False    )', StructField('name12', 'StringType()', False)),
 ]
 
