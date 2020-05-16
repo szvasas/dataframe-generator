@@ -13,7 +13,10 @@ class StructField:
     @staticmethod
     def parse(raw_string: str):
         trimmed_raw_string = raw_string.strip()
-        match_result = re.match(r'StructField\((.*?),(.*?),(.*?)\)', trimmed_raw_string)
+        generators_regexp = "|".join(list(map(lambda generator: generator.type_descriptor, supported_generators)))
+        struct_field_template = r'StructField\((.*?),\s*(' + generators_regexp + r')\s*,(.*?)\)'
+        match_result = re.match(struct_field_template, trimmed_raw_string)
+
         name = StructField.__parse_name(match_result.group(1))
         data_type = StructField.__parse_data_type(match_result.group(2))
         nullable = StructField.__parse_nullable(match_result.group(3))
@@ -73,15 +76,3 @@ def parse_struct_type_raw_string(raw_string: str):
     schema_name = result.group(1).strip()
     raw_struct_fields = result.group(2).strip()
     return schema_name, raw_struct_fields
-
-
-supported_generators_regexp = "|".join(list(map(lambda generator: generator.type_descriptor, supported_generators)))
-# supported_generators_regexp = "LongType\(\)"
-
-input = "StructField('name12', DecimalType(   13   , 2)   , True)"
-template = r'StructField\((.*?),\s*(' + supported_generators_regexp + r')\s*,(.*?)\)'
-result = re.match(template, input)
-
-print(result.group(1))
-print(result.group(2))
-print(result.group(3))
