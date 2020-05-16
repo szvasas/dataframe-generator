@@ -33,6 +33,21 @@ class LongType(DataType):
 
 class DecimalType(DataType):
     type_descriptor = r'DecimalType\(\s*\d+\s*,\s*\d+\s*\)'
+    type_descriptor_grouped = r'DecimalType\(\s*(\d+)\s*,\s*(\d+)\s*\)'
+
+    @staticmethod
+    def parse(data_type, raw_string: str):
+        match_result = re.match(DecimalType.type_descriptor_grouped, raw_string)
+        if match_result is None:
+            return None
+        else:
+            scale = int(match_result.group(1).strip())
+            precision = int(match_result.group(2).strip())
+            return DecimalType(scale, precision)
+
+    def __init__(self, scale: int, precision: int):
+        self.scale = scale
+        self.precision = precision
 
 
 class StringType(DataType):

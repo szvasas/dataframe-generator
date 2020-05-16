@@ -7,9 +7,9 @@ from tests.matchers import assert_struct_field_equals
 test_data = [
     ("StructField('name12', LongType(), True),", StructField('name12', LongType(), True)),
     ("StructField('name12', LongType(), False),", StructField('name12', LongType(), False)),
-    ('StructField("name12", DecimalType(13, 2), False),', StructField('name12', DecimalType(), False)),
-    ('StructField("abc", DecimalType(  13,   2  ), False),', StructField('abc', DecimalType(), False)),
-    ('StructField("abc",DecimalType(13,2),False),', StructField('abc', DecimalType(), False)),
+    ('StructField("name12", DecimalType(13, 2), False),', StructField('name12', DecimalType(13, 2), False)),
+    ('StructField("abc", DecimalType(  13,   2  ), False),', StructField('abc', DecimalType(13, 2), False)),
+    ('StructField("abc",DecimalType(13,2),False),', StructField('abc', DecimalType(13, 2), False)),
     ('StructField(    "name12"    ,     StringType(),False    )', StructField('name12', StringType(), False)),
 ]
 

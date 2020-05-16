@@ -1,7 +1,7 @@
 import pytest
 
 from dataframe_generator.generators import LongType, StringType, ByteType, IntegerType, DateType, TimestampType, \
-    ShortType
+    ShortType, DecimalType
 from dataframe_generator.main import StructType, StructField
 from tests.matchers import assert_struct_type_equals
 
@@ -53,9 +53,9 @@ def test_parse(raw_input, expected):
 
 def test_parse_multiple():
     input_multiple = """
-        schemaname2 = StructType([
+        first_schema = StructType([
           StructField('name12', LongType(), True),
-          StructField('name22', StringType(), True),
+          StructField('name22', DecimalType(3, 2), True),
           StructField('name32', ByteType(), False),
           StructField('name42', IntegerType(), True),
           StructField('name52', DateType(), True),
@@ -72,9 +72,9 @@ def test_parse_multiple():
     """
 
     expected = [
-        StructType('schemaname2', [
+        StructType('first_schema', [
             StructField('name12', LongType(), True),
-            StructField('name22', StringType(), True),
+            StructField('name22', DecimalType(3, 2), True),
             StructField('name32', ByteType(), False),
             StructField('name42', IntegerType(), True),
             StructField('name52', DateType(), True),
