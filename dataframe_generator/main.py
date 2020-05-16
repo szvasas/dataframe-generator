@@ -32,7 +32,7 @@ class StructField:
     def __parse_data_type(raw_data_type: str) -> DataType:
         trimmed_raw_type = raw_data_type.strip()
         data_type = next(
-            filter(lambda supported_type: re.match(supported_type.type_descriptor(), trimmed_raw_type), supported_types)
+            filter(lambda supported_type: supported_type.is_it_this_type(trimmed_raw_type), supported_types)
         )
         return data_type
 
