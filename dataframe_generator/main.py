@@ -3,7 +3,33 @@ from parse import *
 import re
 from typing import List
 
-from dataframe_generator.StructField import StructField
+
+class StructField:
+    def __init__(self, name: str, data_type: str, nullable: bool):
+        self.name = name
+        self.data_type = data_type
+        self.nullable = nullable
+
+    @staticmethod
+    def parse(raw_string: str):
+        trimmed_raw_string = raw_string.strip()
+        match_result = re.match(r'StructField\((.*?),(.*?),(.*?)\)', trimmed_raw_string)
+        name = StructField.__parse_name(match_result.group(1))
+        data_type = StructField.__parse_data_type(match_result.group(2))
+        nullable = StructField.__parse_nullable(match_result.group(3))
+        return StructField(name, data_type, nullable)
+
+    @staticmethod
+    def __parse_name(raw_name: str) -> str:
+        return raw_name.strip()[1:-1]
+
+    @staticmethod
+    def __parse_data_type(raw_data_type: str) -> str:
+        return raw_data_type.strip()
+
+    @staticmethod
+    def __parse_nullable(raw_nullable: str) -> bool:
+        return raw_nullable.strip() == 'True'
 
 
 def create_struct_type_raw_string_list(raw_string: str) -> List:
