@@ -1,6 +1,6 @@
 import pytest
 
-from dataframe_generator.generators import LongType, DecimalType, StringType
+from dataframe_generator.data_type import LongType, DecimalType, StringType
 from dataframe_generator.main import StructField
 from tests.matchers import assert_struct_field_equals
 

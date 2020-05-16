@@ -1,4 +1,4 @@
-from dataframe_generator.generators import DataType, DecimalType
+from dataframe_generator.data_type import DataType, DecimalType
 from dataframe_generator.main import StructField, StructType
 
 

@@ -1,7 +1,7 @@
 import re
 from typing import List
 
-from dataframe_generator.generators import supported_types, DataType
+from dataframe_generator.data_type import supported_types, DataType
 
 
 class StructField:
@@ -72,15 +72,3 @@ class StructType:
         trimmed_raw_fields = raw_fields.strip()
         struct_field_raw_strings = re.findall(r'StructField\(.*?\).*?\)', trimmed_raw_fields, re.DOTALL)
         return list(map(StructField.parse, struct_field_raw_strings))
-
-
-def create_struct_type_raw_string_list(raw_string: str) -> List:
-    return re.findall(r'.*?=.*?StructType\(\[.*?\]\)', raw_string, re.DOTALL)
-
-
-def parse_struct_type_raw_string(raw_string: str):
-    trimmed_input = raw_string.strip()
-    result = re.match(r'(.*?)=.*?StructType\(\[(.*?)\]\)', trimmed_input, re.DOTALL)
-    schema_name = result.group(1).strip()
-    raw_struct_fields = result.group(2).strip()
-    return schema_name, raw_struct_fields
