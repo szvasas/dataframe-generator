@@ -1,7 +1,7 @@
 import re
 from typing import List
 
-from dataframe_generator.generators import supported_generators
+from dataframe_generator.generators import supported_generators, LongType
 
 
 class StructField:

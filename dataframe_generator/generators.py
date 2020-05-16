@@ -1,41 +1,41 @@
-class ByteGenerator:
+class ByteType:
     type_descriptor = r'ByteType\(\)'
 
 
-class ShortGenerator:
+class ShortType:
     type_descriptor = r'ShortType\(\)'
 
 
-class IntegerGenerator:
+class IntegerType:
     type_descriptor = r'IntegerType\(\)'
 
 
-class LongGenerator:
+class LongType:
     type_descriptor = r'LongType\(\)'
 
 
-class DecimalGenerator:
+class DecimalType:
     type_descriptor = r'DecimalType\(\s*\d+\s*,\s*\d+\s*\)'
 
 
-class StringGenerator:
+class StringType:
     type_descriptor = r'StringType\(\)'
 
 
-class DateGenerator:
+class DateType:
     type_descriptor = r'DateType\(\)'
 
 
-class TimestampGenerator:
+class TimestampType:
     type_descriptor = r'TimestampType\(\)'
 
 
-supported_generators = [ByteGenerator(),
-                        ShortGenerator(),
-                        IntegerGenerator(),
-                        LongGenerator(),
-                        DecimalGenerator(),
-                        StringGenerator(),
-                        DateGenerator(),
-                        TimestampGenerator()
+supported_generators = [ByteType(),
+                        ShortType(),
+                        IntegerType(),
+                        LongType(),
+                        DecimalType(),
+                        StringType(),
+                        DateType(),
+                        TimestampType()
                         ]
