@@ -36,6 +36,12 @@ class StructType:
         self.fields = fields
 
     @staticmethod
+    def parse_multiple(raw_string: str) -> List:
+        trimmed_raw_string = raw_string.strip()
+        raw_struct_type_strings = re.findall(r'.*?=.*?StructType\(\[.*?\]\)', trimmed_raw_string, re.DOTALL)
+        return list(map(StructType.parse, raw_struct_type_strings))
+
+    @staticmethod
     def parse(raw_string: str):
         trimmed_raw_string = raw_string.strip()
         match_result = re.match(r'(.*?)=.*?StructType\(\[(.*?)\]\)', trimmed_raw_string, re.DOTALL)
@@ -75,7 +81,7 @@ input = """
     StructField('name4', IntegerType(), True),
     StructField('name5', DateType(), True),
     StructField('name6', TimestampType(), True),
-    StructField('name7', DecimalType(13, 2), True),
+    StructField('name7', ShortType(), True),
   ])
 
   schemaname2 = StructType([
@@ -85,7 +91,7 @@ input = """
     StructField('name42', IntegerType(), True),
     StructField('name52', DateType(), True),
     StructField('name62', TimestampType(), True),
-    StructField('name72', DecimalType(13, 2), True),
+    StructField('name72', DateType(), True),
   ])
 """
 
