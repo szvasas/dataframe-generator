@@ -1,6 +1,8 @@
 import re
 from typing import List
 
+from dataframe_generator.generators import supported_generators
+
 
 class StructField:
     def __init__(self, name: str, data_type: str, nullable: bool):
@@ -73,47 +75,13 @@ def parse_struct_type_raw_string(raw_string: str):
     return schema_name, raw_struct_fields
 
 
-input = """
-  schemaname =         StructType([
-    StructField('name1', LongType(), True),
-    StructField('name2', StringType(), True),
-    StructField('name3', ByteType(), True),
-    StructField('name4', IntegerType(), True),
-    StructField('name5', DateType(), True),
-    StructField('name6', TimestampType(), True),
-    StructField('name7', ShortType(), True),
-  ])
+supported_generators_regexp = "|".join(list(map(lambda generator: generator.type_descriptor, supported_generators)))
+# supported_generators_regexp = "LongType\(\)"
 
-  schemaname2 = StructType([
-    StructField('name12', LongType(), True),
-    StructField('name22', StringType(), True),
-    StructField('name32', ByteType(), True),
-    StructField('name42', IntegerType(), True),
-    StructField('name52', DateType(), True),
-    StructField('name62', TimestampType(), True),
-    StructField('name72', DateType(), True),
-  ])
-"""
+input = "StructField('name12', DecimalType(   13   , 2)   , True)"
+template = r'StructField\((.*?),\s*(' + supported_generators_regexp + r')\s*,(.*?)\)'
+result = re.match(template, input)
 
-# result = create_struct_type_raw_string_list(input)
-# schema_name, raw_struct_fields = parse_struct_type_raw_string(result[0])
-# print("success")
-
-result = StructField.parse("StructField('name12', LongType(), True),")
-print(result)
-print(result.name)
-
-# input2 = "valami(12313) valami(45412) valami(1235)"
-#
-# # result = re.match(".*?StructType(.*?)", input2)
-#
-# result = re.findall(r'StructField\(.*?\).*?\)', input, re.DOTALL)
-#
-# first_result = result[0]
-#
-# result = re.match(r'StructField\((.*?), (.*?), (.*?)\)', first_result)
-#
-# print(result.group())
-# print(result.group(1))
-# print(result.group(2))
-# print(result.group(3))
+print(result.group(1))
+print(result.group(2))
+print(result.group(3))
