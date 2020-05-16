@@ -1,5 +1,7 @@
 import pytest
 
+from dataframe_generator.generators import LongType, StringType, ByteType, IntegerType, DateType, TimestampType, \
+    ShortType
 from dataframe_generator.main import StructType, StructField
 from tests.matchers import assert_struct_type_equals
 
@@ -15,13 +17,13 @@ test_data = [
           StructField('name72', ShortType(), False),
         ])""",
         StructType('schemaname2', [
-          StructField('name12', 'LongType()', True),
-          StructField('name22', 'StringType()', True),
-          StructField('name32', 'ByteType()', False),
-          StructField('name42', 'IntegerType()', True),
-          StructField('name52', 'DateType()', True),
-          StructField('name62', 'TimestampType()', True),
-          StructField('name72', 'ShortType()', False),
+          StructField('name12', LongType(), True),
+          StructField('name22', StringType(), True),
+          StructField('name32', ByteType(), False),
+          StructField('name42', IntegerType(), True),
+          StructField('name52', DateType(), True),
+          StructField('name62', TimestampType(), True),
+          StructField('name72', ShortType(), False),
         ])
      ),
     ("""
@@ -32,13 +34,13 @@ test_data = [
           StructField('name72',ShortType(),False)
         ])""",
      StructType('my_cool_schema', [
-         StructField('name12', 'LongType()', False),
-         StructField('name22', 'StringType()', True),
-         StructField('name32', 'ByteType()', False),
-         StructField('name42', 'IntegerType()', True),
-         StructField('name52', 'DateType()', True),
-         StructField('name62', 'TimestampType()', True),
-         StructField('name72', 'ShortType()', False),
+         StructField('name12', LongType(), False),
+         StructField('name22', StringType(), True),
+         StructField('name32', ByteType(), False),
+         StructField('name42', IntegerType(), True),
+         StructField('name52', DateType(), True),
+         StructField('name62', TimestampType(), True),
+         StructField('name72', ShortType(), False),
      ])
      ),
 ]
@@ -71,22 +73,22 @@ def test_parse_multiple():
 
     expected = [
         StructType('schemaname2', [
-            StructField('name12', 'LongType()', True),
-            StructField('name22', 'StringType()', True),
-            StructField('name32', 'ByteType()', False),
-            StructField('name42', 'IntegerType()', True),
-            StructField('name52', 'DateType()', True),
-            StructField('name62', 'TimestampType()', True),
-            StructField('name72', 'ShortType()', False),
+            StructField('name12', LongType(), True),
+            StructField('name22', StringType(), True),
+            StructField('name32', ByteType(), False),
+            StructField('name42', IntegerType(), True),
+            StructField('name52', DateType(), True),
+            StructField('name62', TimestampType(), True),
+            StructField('name72', ShortType(), False),
         ]),
         StructType('my_cool_schema', [
-            StructField('name12', 'LongType()', False),
-            StructField('name22', 'StringType()', True),
-            StructField('name32', 'ByteType()', False),
-            StructField('name42', 'IntegerType()', True),
-            StructField('name52', 'DateType()', True),
-            StructField('name62', 'TimestampType()', True),
-            StructField('name72', 'ShortType()', False),
+            StructField('name12', LongType(), False),
+            StructField('name22', StringType(), True),
+            StructField('name32', ByteType(), False),
+            StructField('name42', IntegerType(), True),
+            StructField('name52', DateType(), True),
+            StructField('name62', TimestampType(), True),
+            StructField('name72', ShortType(), False),
         ])
     ]
 

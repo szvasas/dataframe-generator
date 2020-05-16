@@ -3,7 +3,7 @@ from dataframe_generator.main import StructField, StructType
 
 def assert_struct_field_equals(expected: StructField, actual: StructField):
     assert expected.name == actual.name
-    assert expected.data_type == actual.data_type
+    assert isinstance(expected.data_type, type(actual.data_type))
     assert expected.nullable == actual.nullable
 
 

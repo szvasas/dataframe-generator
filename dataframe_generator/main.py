@@ -1,11 +1,11 @@
 import re
 from typing import List
 
-from dataframe_generator.generators import supported_generators, LongType
+from dataframe_generator.generators import supported_types, LongType, DataType
 
 
 class StructField:
-    def __init__(self, name: str, data_type: str, nullable: bool):
+    def __init__(self, name: str, data_type: DataType, nullable: bool):
         self.name = name
         self.data_type = data_type
         self.nullable = nullable
@@ -13,8 +13,10 @@ class StructField:
     @staticmethod
     def parse(raw_string: str):
         trimmed_raw_string = raw_string.strip()
-        generators_regexp = "|".join(list(map(lambda generator: generator.type_descriptor, supported_generators)))
-        struct_field_template = r'StructField\((.*?),\s*(' + generators_regexp + r')\s*,(.*?)\)'
+        data_types_regexp = "|".join(
+            list(map(lambda supported_type: supported_type.type_descriptor(), supported_types))
+        )
+        struct_field_template = r'StructField\((.*?),\s*(' + data_types_regexp + r')\s*,(.*?)\)'
         match_result = re.match(struct_field_template, trimmed_raw_string)
 
         name = StructField.__parse_name(match_result.group(1))
@@ -27,8 +29,12 @@ class StructField:
         return raw_name.strip()[1:-1]
 
     @staticmethod
-    def __parse_data_type(raw_data_type: str) -> str:
-        return raw_data_type.strip()
+    def __parse_data_type(raw_data_type: str) -> DataType:
+        trimmed_raw_type = raw_data_type.strip()
+        data_type = next(
+            filter(lambda supported_type: re.match(supported_type.type_descriptor(), trimmed_raw_type), supported_types)
+        )
+        return data_type
 
     @staticmethod
     def __parse_nullable(raw_nullable: str) -> bool:

@@ -1,41 +1,55 @@
-class ByteType:
-    type_descriptor = r'ByteType\(\)'
+class DataType:
+
+    def type_descriptor(self):
+        pass
 
 
-class ShortType:
-    type_descriptor = r'ShortType\(\)'
+class ByteType(DataType):
+    def type_descriptor(self):
+        return r'ByteType\(\)'
 
 
-class IntegerType:
-    type_descriptor = r'IntegerType\(\)'
+class ShortType(DataType):
+    def type_descriptor(self):
+        return r'ShortType\(\)'
 
 
-class LongType:
-    type_descriptor = r'LongType\(\)'
+class IntegerType(DataType):
+    def type_descriptor(self):
+        return r'IntegerType\(\)'
 
 
-class DecimalType:
-    type_descriptor = r'DecimalType\(\s*\d+\s*,\s*\d+\s*\)'
+class LongType(DataType):
+    def type_descriptor(self):
+        return r'LongType\(\)'
 
 
-class StringType:
-    type_descriptor = r'StringType\(\)'
+class DecimalType(DataType):
+    def type_descriptor(self):
+        return r'DecimalType\(\s*\d+\s*,\s*\d+\s*\)'
 
 
-class DateType:
-    type_descriptor = r'DateType\(\)'
+class StringType(DataType):
+    def type_descriptor(self):
+        return r'StringType\(\)'
 
 
-class TimestampType:
-    type_descriptor = r'TimestampType\(\)'
+class DateType(DataType):
+    def type_descriptor(self):
+        return r'DateType\(\)'
 
 
-supported_generators = [ByteType(),
-                        ShortType(),
-                        IntegerType(),
-                        LongType(),
-                        DecimalType(),
-                        StringType(),
-                        DateType(),
-                        TimestampType()
-                        ]
+class TimestampType(DataType):
+    def type_descriptor(self):
+        return r'TimestampType\(\)'
+
+
+supported_types = [ByteType(),
+                   ShortType(),
+                   IntegerType(),
+                   LongType(),
+                   DecimalType(),
+                   StringType(),
+                   DateType(),
+                   TimestampType()
+                   ]
