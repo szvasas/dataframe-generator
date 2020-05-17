@@ -1,4 +1,5 @@
 from dataframe_generator.generator import generate_values
+from dataframe_generator.outputter import generate_csv
 from dataframe_generator.struct_type import StructType
 
 input_raw = """
@@ -17,7 +18,6 @@ first_schema = StructType([
 struct = StructType.parse(input_raw)
 
 result = generate_values(10, struct)
-print(result['field_names'])
 
-for i in result['values']:
-    print(i)
+result_string = generate_csv(result)
+print(result_string)
