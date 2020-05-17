@@ -8,11 +8,7 @@ from random import randint, choice
 class DataType:
 
     @staticmethod
-    def type_descriptor() -> str:
-        pass
-
-    @staticmethod
-    def parse(data_type, raw_string: str):
+    def create_from_string(data_type, raw_string: str):
         if re.match(data_type.type_descriptor, raw_string):
             return data_type()
         else:
@@ -70,7 +66,7 @@ class DecimalType(DataType):
     type_descriptor_grouped = r'DecimalType\(\s*(\d+)\s*,\s*(\d+)\s*\)'
 
     @staticmethod
-    def parse(data_type, raw_string: str):
+    def create_from_string(data_type, raw_string: str):
         match_result = re.match(DecimalType.type_descriptor_grouped, raw_string)
         if match_result is None:
             return None
@@ -98,7 +94,7 @@ class StringType(DataType):
 
     def next_value(self, length=10) -> str:
         letters = string.ascii_lowercase
-        return ''.join((choice(letters) for i in range(length)))
+        return ''.join((choice(letters) for _ in range(length)))
 
     def parse_value(self, raw_string: str) -> str:
         return raw_string

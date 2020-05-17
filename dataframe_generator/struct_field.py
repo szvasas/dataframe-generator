@@ -31,7 +31,7 @@ class StructField:
     def __parse_data_type(raw_string: str) -> DataType:
         trimmed_raw_string = raw_string.strip()
         for supported_type in supported_types:
-            potential_result = supported_type.parse(supported_type, trimmed_raw_string)
+            potential_result = supported_type.create_from_string(supported_type, trimmed_raw_string)
             if potential_result is not None:
                 return potential_result
 
