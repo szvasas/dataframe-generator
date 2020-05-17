@@ -1,5 +1,6 @@
 from dataframe_generator.data_type import DataType, DecimalType
-from dataframe_generator.main import StructField, StructType
+from dataframe_generator.struct_field import StructField
+from dataframe_generator.struct_type import StructType
 
 
 def assert_struct_field_equals(expected: StructField, actual: StructField):

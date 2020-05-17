@@ -2,7 +2,8 @@ import pytest
 
 from dataframe_generator.data_type import LongType, StringType, ByteType, IntegerType, DateType, TimestampType, \
     ShortType, DecimalType
-from dataframe_generator.main import StructType, StructField
+from dataframe_generator.struct_field import StructField
+from dataframe_generator.struct_type import StructType
 from tests.matchers import assert_struct_type_equals
 
 test_data = [

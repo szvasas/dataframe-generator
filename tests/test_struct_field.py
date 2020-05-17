@@ -1,7 +1,7 @@
 import pytest
 
 from dataframe_generator.data_type import LongType, DecimalType, StringType
-from dataframe_generator.main import StructField
+from dataframe_generator.struct_field import StructField
 from tests.matchers import assert_struct_field_equals
 
 test_data = [
