@@ -17,7 +17,7 @@ first_schema = StructType([
 
 struct = StructType.parse(input_raw)
 
-result = generate_values(10, struct)
+result = generate_values(10, struct, {'name6': 'myvalue', 'name7': '2020-10-11', 'name5': '43.12'})
 
 result_string = generate_csv(result)
 print(result_string)

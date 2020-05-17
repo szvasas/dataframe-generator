@@ -5,12 +5,14 @@ from dataframe_generator.struct_field import StructField
 from dataframe_generator.struct_type import StructType
 
 
-def generate_values(num_rows: int, struct_type: StructType) -> Dict:
+def generate_values(num_rows: int, struct_type: StructType, preset_values: Dict = {}) -> Dict:
     values = []
     for _ in range(1, num_rows):
         row = []
         for field in struct_type.fields:
-            if __will_it_be_none(field):
+            if field.name in preset_values:
+                row.append(field.data_type.parse_value(preset_values[field.name]))
+            elif __will_it_be_none(field):
                 row.append(None)
             else:
                 row.append(field.data_type.next_value())

@@ -21,12 +21,18 @@ class DataType:
     def next_value(self):
         pass
 
+    def parse_value(self, raw_string: str):
+        pass
+
 
 class ByteType(DataType):
     type_descriptor = r'ByteType\(\)'
 
     def next_value(self) -> int:
         return randint(-128, 127)
+
+    def parse_value(self, raw_string: str) -> int:
+        return int(raw_string)
 
 
 class ShortType(DataType):
@@ -35,6 +41,9 @@ class ShortType(DataType):
     def next_value(self) -> int:
         return randint(-32768, 32767)
 
+    def parse_value(self, raw_string: str) -> int:
+        return int(raw_string)
+
 
 class IntegerType(DataType):
     type_descriptor = r'IntegerType\(\)'
@@ -42,12 +51,18 @@ class IntegerType(DataType):
     def next_value(self) -> int:
         return randint(-2147483648, 2147483647)
 
+    def parse_value(self, raw_string: str) -> int:
+        return int(raw_string)
+
 
 class LongType(DataType):
     type_descriptor = r'LongType\(\)'
 
     def next_value(self) -> int:
         return randint(-9223372036854775808, 9223372036854775807)
+
+    def parse_value(self, raw_string: str) -> int:
+        return int(raw_string)
 
 
 class DecimalType(DataType):
@@ -74,6 +89,9 @@ class DecimalType(DataType):
         signum = randint(-1, 0)
         return copysign(unscaled, signum) / pow(10, self.precision)
 
+    def parse_value(self, raw_string: str) -> float:
+        return float(raw_string)
+
 
 class StringType(DataType):
     type_descriptor = r'StringType\(\)'
@@ -81,6 +99,9 @@ class StringType(DataType):
     def next_value(self, length=10) -> str:
         letters = string.ascii_lowercase
         return ''.join((choice(letters) for i in range(length)))
+
+    def parse_value(self, raw_string: str) -> str:
+        return raw_string
 
 
 class DateType(DataType):
@@ -91,6 +112,9 @@ class DateType(DataType):
         random_days = randint(0, 1000)
         return end - timedelta(days=random_days)
 
+    def parse_value(self, raw_string: str) -> date:
+        return datetime.strptime(raw_string, '%Y-%m-%d').date()
+
 
 class TimestampType(DataType):
     type_descriptor = r'TimestampType\(\)'
@@ -99,6 +123,9 @@ class TimestampType(DataType):
         end = datetime.now()
         random_seconds = randint(0, 100000000)
         return end - timedelta(seconds=random_seconds)
+
+    def parse_value(self, raw_string: str) -> datetime:
+        return datetime.strptime(raw_string, '%Y-%m-%d %H:%M:%S')
 
 
 supported_types = [ByteType,
