@@ -1,4 +1,5 @@
 import re
+from random import randint
 from typing import List
 
 from dataframe_generator.data_type import supported_types, DataType
@@ -72,3 +73,18 @@ class StructType:
         trimmed_raw_fields = raw_fields.strip()
         struct_field_raw_strings = re.findall(r'StructField\(.*?\).*?\)', trimmed_raw_fields, re.DOTALL)
         return list(map(StructField.parse, struct_field_raw_strings))
+
+
+def value_generator(num_rows: int, struct_type: StructType) -> List:
+    result = []
+    for _ in range(1, num_rows):
+        row = []
+        for field in struct_type.fields:
+            is_none = field.nullable and randint(1, 10) == 5
+            if is_none:
+                row.append(None)
+            else:
+                row.append(field.data_type.next_value())
+        result.append(row)
+
+    return result

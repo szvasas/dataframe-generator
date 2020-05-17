@@ -18,6 +18,9 @@ class DataType:
         else:
             return None
 
+    def next_value(self):
+        pass
+
 
 class ByteType(DataType):
     type_descriptor = r'ByteType\(\)'
