@@ -1,23 +1,35 @@
+import sys
+
 from dataframe_generator.generator import generate_values
 from dataframe_generator.outputter import generate_csv
 from dataframe_generator.struct_type import StructType
+import json
 
-input_raw = """
-first_schema = StructType([
-          StructField('name1', ByteType(), True),
-          StructField('name2', ShortType(), True),
-          StructField('name3', IntegerType(), True),
-          StructField('name4', LongType(), True),
-          StructField('name5', DecimalType(3, 2), True),
-          StructField('name6', StringType(), False),
-          StructField('name7', DateType(), True),
-          StructField('name8', TimestampType(), True),
-        ])
-"""
+print("Enter the StructType definition: ")
+lines = []
+line = " "
+while len(line) > 0:
+    line = input()
+    lines.append(line)
+input_raw = '\n'.join(lines)
 
 struct = StructType.parse(input_raw)
 
-result = generate_values(10, struct, {'name6': 'myvalue', 'name7': '2020-10-11', 'name5': '43.12'})
 
-result_string = generate_csv(result)
-print(result_string)
+while True:
+    num_rows_raw = input("Number of records to generate (empty to exit): ")
+    if not num_rows_raw:
+        break
+
+    preset_values_raw = input("Enter preset values: ")
+    if not preset_values_raw:
+        preset_values_raw = "{}"
+
+    try:
+        num_rows = int(num_rows_raw)
+        preset_values = json.loads(preset_values_raw)
+        result = generate_values(num_rows, struct, preset_values)
+        result_string = generate_csv(result)
+        print(result_string)
+    except:
+        print("Error parsing input.")
