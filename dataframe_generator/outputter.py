@@ -18,7 +18,9 @@ def generate_csv(values: Dict, separator: str = ',', header: bool = True) -> str
 
 
 def __to_string(column) -> str:
-    if isinstance(column, datetime.datetime):
+    if column is None:
+        return ""
+    elif isinstance(column, datetime.datetime):
         return column.strftime("%Y-%m-%d %H:%M:%S")
     elif isinstance(column, datetime.date):
         return column.strftime("%Y-%m-%d")
