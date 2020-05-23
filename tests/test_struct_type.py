@@ -72,8 +72,8 @@ def test_parse_multiple():
         ])
     """
 
-    expected = [
-        StructType('first_schema', [
+    expected = {
+        'first_schema': StructType('first_schema', [
             StructField('name12', LongType(), True),
             StructField('name22', DecimalType(3, 2), True),
             StructField('name32', ByteType(), False),
@@ -82,7 +82,7 @@ def test_parse_multiple():
             StructField('name62', TimestampType(), True),
             StructField('name72', ShortType(), False),
         ]),
-        StructType('my_cool_schema', [
+        'my_cool_schema': StructType('my_cool_schema', [
             StructField('name12', LongType(), False),
             StructField('name22', StringType(), True),
             StructField('name32', ByteType(), False),
@@ -91,8 +91,8 @@ def test_parse_multiple():
             StructField('name62', TimestampType(), True),
             StructField('name72', ShortType(), False),
         ])
-    ]
+    }
 
     actual = StructType.parse_multiple(input_multiple)
-    assert_struct_type_equals(expected[0], actual[0])
-    assert_struct_type_equals(expected[1], actual[1])
+    assert_struct_type_equals(expected['first_schema'], actual['first_schema'])
+    assert_struct_type_equals(expected['my_cool_schema'], actual['my_cool_schema'])

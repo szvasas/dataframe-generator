@@ -1,5 +1,5 @@
 import re
-from typing import List
+from typing import List, Dict
 
 from dataframe_generator.struct_field import StructField
 
@@ -10,10 +10,15 @@ class StructType:
         self.fields = fields
 
     @staticmethod
-    def parse_multiple(raw_string: str) -> List:
+    def parse_multiple(raw_string: str) -> Dict:
         trimmed_raw_string = raw_string.strip()
         raw_struct_type_strings = re.findall(r'.*?=.*?StructType\(\[.*?\]\)', trimmed_raw_string, re.DOTALL)
-        return list(map(StructType.parse, raw_struct_type_strings))
+        parsed_struct_types = map(StructType.parse, raw_struct_type_strings)
+        result = dict()
+        for parsed in parsed_struct_types:
+            result[parsed.name] = parsed
+
+        return result
 
     @staticmethod
     def parse(raw_string: str):
