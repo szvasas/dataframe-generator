@@ -26,6 +26,9 @@ def choose_struct(structs: Dict[str, StructType]) -> str:
         indexed_structs[i] = struct
         i = i + 1
 
+    if len(indexed_structs) == 1:
+        return indexed_structs[1][0]
+
     for i in indexed_structs.items():
         print(f"{i[0]}: {i[1][0]}")
     chosen_index_raw = input("Choose a StructType (empty to exit): ")
@@ -53,6 +56,7 @@ def enter_generator_loop(struct_types: Dict[str, StructType]):
             preset_values = json.loads(preset_values_raw)
             result = generate_values(num_rows, struct_types[struct_name], preset_values)
             result_string = generate_csv(result)
+            print()
             print(result_string)
         except:
             print("Error parsing input.")
