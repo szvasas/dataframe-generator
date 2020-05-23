@@ -49,7 +49,10 @@ def enter_generator_loop(struct_types: Dict[str, StructType]):
             break
 
         try:
-            num_rows = int(input("Number of records to generate: "))
+            num_rows_raw = input("Number of records to generate (empty to exit): ")
+            if not num_rows_raw:
+                break
+            num_rows = int(num_rows_raw)
             preset_values_raw = input("Enter preset values: ")
             if not preset_values_raw:
                 preset_values_raw = "{}"
