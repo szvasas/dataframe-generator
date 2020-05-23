@@ -19,3 +19,5 @@ Let's generate a dataset where the `name` field is fixed but the `age` can be
 10, 20 or 30.
 
 <p align="center"><img src="docs/test_03.gif?raw=true"/></p>
+
+### Generate test data with a multiple StructType definitions
