@@ -1,9 +1,9 @@
+import json
 from typing import Dict
 
 from dataframe_generator.generator import generate_values
 from dataframe_generator.outputter import generate_csv
 from dataframe_generator.struct_type import StructType
-import json
 
 
 def read_struct_types() -> Dict[str, StructType]:
@@ -31,8 +31,12 @@ def choose_struct(structs: Dict[str, StructType]) -> str:
     chosen_index_raw = input("Choose a StructType (empty to exit): ")
     if not chosen_index_raw:
         return ''
-    chosen_index = int(chosen_index_raw)
-    return indexed_structs[chosen_index][0]
+    try:
+        chosen_index = int(chosen_index_raw)
+        return indexed_structs[chosen_index][0]
+    except:
+        print("Wrong index.")
+        return choose_struct(structs)
 
 
 def enter_generator_loop(struct_types: Dict[str, StructType]):
@@ -41,14 +45,11 @@ def enter_generator_loop(struct_types: Dict[str, StructType]):
         if not struct_name:
             break
 
-        num_rows_raw = input("Number of records to generate: ")
-
-        preset_values_raw = input("Enter preset values: ")
-        if not preset_values_raw:
-            preset_values_raw = "{}"
-
         try:
-            num_rows = int(num_rows_raw)
+            num_rows = int(input("Number of records to generate: "))
+            preset_values_raw = input("Enter preset values: ")
+            if not preset_values_raw:
+                preset_values_raw = "{}"
             preset_values = json.loads(preset_values_raw)
             result = generate_values(num_rows, struct_types[struct_name], preset_values)
             result_string = generate_csv(result)
