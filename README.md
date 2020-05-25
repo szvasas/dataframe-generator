@@ -25,9 +25,26 @@ first_schema = StructType([
 ])
 ```
 
-After that just specify the number of desired rows and the potential preset values. See examples below.
+After that just specify the number of desired rows and the potential preset values.
+Example output:
 
-## Supported data types
+```
+name,age,birth_day,address
+swmpdtafzg,-2140202707,,vnisqzetus
+paguzsigqx,1406646118,2018-11-04,ohjxckqdnq
+lvnpgnsamp,-2033958134,2018-07-24,rpheidzvgs
+vxmzvddepr,353494172,2019-12-23,icyqejjwsa
+ylgcktzxcb,1829894295,2019-02-25,ykrnsqjjdl
+vfkvsstziy,45380949,2018-03-13,bcajepkfde
+csuudyqemr,-1148638844,2019-09-01,
+spoaxntbop,76052710,2018-02-16,gxzfbynvtt
+lvoxqmklyi,-1445530354,2019-09-21,fkpgxijbdc
+ylfcxfscpi,651593707,2019-04-18,atnkksxfgh
+```
+
+For more details see examples below.
+
+## Supported PySpark data types
 
  * `ByteType()`
  * `ShortType()`
